@@ -17,11 +17,15 @@ export const Post = (props) => {
         { ...comment } />);
 
     const [selectedPostComment, setSelectedPostComment] = useContext(Context);
+    const commentHash = selectedPostComment === hash;
     const handleClick = () => {
         setSelectedPostComment(hash);
+        if (commentHash) {
+            setSelectedPostComment('');
+        }
     };
     const commentClass = cx('comment', {
-        'comment-fill': selectedPostComment === hash,
+        'comment-fill': commentHash,
     });
 
     return (
@@ -46,7 +50,7 @@ export const Post = (props) => {
                     0 comments
                 </span>
             </div>
-            { selectedPostComment === hash &&  (
+            { commentHash &&  (
                 <>
                     <CommentsForm />
                     <ul>
