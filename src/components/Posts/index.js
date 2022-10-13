@@ -1,7 +1,15 @@
 import { Post } from '../Post';
 import { Composer } from '../forms/Composer';
 
+// Mock
+import posts from '../../mock-data/posts.json';
+
+
 export const Posts = () => {
+    const postsJSX = posts.map((post) => (
+        <Post key = { post.hash } { ...post } />
+    ));
+
     return (
         <div className = { 'posts' }>
             <h1 className = 'title'>
@@ -11,9 +19,7 @@ export const Posts = () => {
             <div
                 className = 'posts-container'
                 style = { { position: 'relative' } }>
-                <Post />
-                <Post />
-                <Post />
+                { postsJSX }
             </div>
         </div>
     );

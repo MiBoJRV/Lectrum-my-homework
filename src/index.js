@@ -8,11 +8,16 @@ import './theme/init.scss';
 
 // Instruments
 
+// Context provider
+import { CommentsFormProvider } from './lib/commentsFormContext';
+
 // App
 import { App } from './App';
 
 createRoot(document.getElementById('root')).render(
     <>
-        <App />
+        <CommentsFormProvider>
+            <App />
+        </CommentsFormProvider>
     </>,
 );
