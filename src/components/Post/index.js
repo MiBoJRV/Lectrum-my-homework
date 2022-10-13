@@ -19,9 +19,10 @@ export const Post = (props) => {
     const [selectedPostComment, setSelectedPostComment] = useContext(Context);
     const commentHash = selectedPostComment === hash;
     const handleClick = () => {
-        setSelectedPostComment(hash);
         if (commentHash) {
             setSelectedPostComment('');
+        } else {
+            setSelectedPostComment(hash);
         }
     };
     const commentClass = cx('comment', {
