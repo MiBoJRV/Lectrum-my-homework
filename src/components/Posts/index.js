@@ -1,12 +1,15 @@
 import { Post } from '../Post';
 import { Composer } from '../forms/Composer';
 
-// Mock
-import posts from '../../mock-data/posts.json';
+// Hook
+import { usePosts } from '../../hooks/usePosts';
 
+// Helpers
+import { fetchify } from '../../helpers/fetchify';
 
 export const Posts = () => {
-    const postsJSX = posts.map((post) => (
+    const { data, isFetched } = usePosts();
+    const postsJSX = data.map((post) => (
         <Post key = { post.hash } { ...post } />
     ));
 
@@ -19,7 +22,7 @@ export const Posts = () => {
             <div
                 className = 'posts-container'
                 style = { { position: 'relative' } }>
-                { postsJSX }
+                { fetchify(isFetched, postsJSX) }
             </div>
         </div>
     );
