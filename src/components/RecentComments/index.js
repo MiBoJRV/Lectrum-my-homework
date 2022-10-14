@@ -1,5 +1,7 @@
-// Mock
-import comments from '../../mock-data/comments.json';
+import { useRecentComments } from '../../hooks/useRecentComments';
+
+// Helpers
+import { fetchify } from '../../helpers/fetchify';
 
 export const RecentComment = (props) => {
     const {
@@ -21,7 +23,8 @@ export const RecentComment = (props) => {
 };
 
 export const RecentComments = () => {
-    const commentsJSX = comments.map((comment) => (
+    const { data, isFetched } = useRecentComments();
+    const commentsJSX = data.map((comment) => (
         <RecentComment key = { comment.hash } { ...comment } />
     ));
 
@@ -31,7 +34,7 @@ export const RecentComments = () => {
                 Популярные комментарии
             </h1>
             <section>
-                { commentsJSX }
+                { fetchify(isFetched, commentsJSX) }
             </section>
         </div>
     );
